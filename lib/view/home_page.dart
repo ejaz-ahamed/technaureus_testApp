@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:technaureus_app/view/widgets/bottom_nav_widget.dart';
 import 'package:technaureus_app/view/widgets/gridview_builder_widget.dart';
 
 class HomePage extends StatelessWidget {
@@ -37,6 +38,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      bottomNavigationBar: const BottomNavWidget(),
     );
   }
 }
