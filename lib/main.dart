@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:technaureus_app/view/home_page.dart';
+import 'package:technaureus_app/view/pages/home_page.dart';
 
 void main() {
   runApp(const MyApp());

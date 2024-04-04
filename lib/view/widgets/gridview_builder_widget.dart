@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:technaureus_app/controller/homepage_controller.dart';
+import 'package:technaureus_app/view/pages/customer_page.dart';
+import 'package:technaureus_app/view/pages/product_page.dart';
 
-class GridviewBuilderWidget extends StatefulWidget {
+class GridviewBuilderWidget extends HookWidget {
   const GridviewBuilderWidget({super.key});
 
   @override
-  State<GridviewBuilderWidget> createState() => _GridviewBuilderWidgetState();
-}
-
-class _GridviewBuilderWidgetState extends State<GridviewBuilderWidget> {
-  int? selectedIndex;
-
-  @override
   Widget build(BuildContext context) {
+    final selectedIndex = useState<int?>(null);
+
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: GridView.builder(
@@ -27,14 +25,19 @@ class _GridviewBuilderWidgetState extends State<GridviewBuilderWidget> {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              setState(() {
-                selectedIndex = index;
-              });
+              selectedIndex.value = index;
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => selectedIndex.value == 0
+                        ? const CustomerPage()
+                        : const ProductPage(),
+                  ));
             },
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(14),
-                  color: selectedIndex == index
+                  color: selectedIndex.value == index
                       ? const Color(0xFF17479b)
                       : Colors.white,
                   boxShadow: [
@@ -48,18 +51,18 @@ class _GridviewBuilderWidgetState extends State<GridviewBuilderWidget> {
                     Icon(
                       listofModels[index].icon,
                       size: 40,
-                      color: selectedIndex == index
+                      color: selectedIndex.value == index
                           ? Colors.white
                           : const Color(0xFF17479b),
                     ),
                     Text(
                       listofModels[index].title,
                       style: TextStyle(
-                          color: selectedIndex == index
+                          color: selectedIndex.value == index
                               ? Colors.white
-                              : const Color(0xFF17479b),
+                              : Colors.black,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14),
+                          fontSize: 16),
                     )
                   ],
                 ),
