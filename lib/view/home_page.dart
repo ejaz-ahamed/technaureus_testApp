@@ -38,6 +38,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
       ),
+      extendBody: true,
       bottomNavigationBar: const BottomNavWidget(),
     );
   }
